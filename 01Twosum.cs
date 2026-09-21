@@ -33,7 +33,7 @@ class Twosum
 }
 
 
-//raw
+//First version, raw thinking
 
 
         // for (int i = 0; i < nums.Length; i++)
@@ -52,7 +52,7 @@ class Twosum
         // return [];
 
 
-//right answer
+//After rethinking, and searching for better solutions
 
     // Hashtable hashtable = new Hashtable();
     //     for(int i = 0; i < nums.Length; i++)

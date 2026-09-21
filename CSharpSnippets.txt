@@ -1,0 +1,4 @@
+Just a list of snippets im using often, just as a reminder to myself. 
+
+sim - Creates a static int Main method declaration.
+svm - Creates a static void Main method declaration.
