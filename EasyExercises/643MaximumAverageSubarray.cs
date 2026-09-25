@@ -2,55 +2,87 @@ class MaximumAverageSubarray
 {
     static void Main(string[] args)
     {
-        int[] nums = [8860, -853, 6534, 4477, -4589, 8646, -6155, -5577, -1656, -5779, -2619, -8604, -1358, -8009, 4983, 7063, 3104, -1560, 4080, 2763, 5616, -2375, 2848, 1394, -7173, -5225, -8244, -809, 8025, -4072, -4391, -9579, 1407, 6700, 2421, -6685, 5481, -1732, -8892, -6645, 3077, 3287, -4149, 8701, -4393, -9070, -1777, 2237, -3253, -506, -4931, -7366, -8132, 5406, -6300, -275, -1908, 67, 3569, 1433, -7262, -437, 8303, 4498, -379, 3054, -6285, 4203, 6908, 4433, 3077, 2288, 9733, -8067, 3007, 9725, 9669, 1362, -2561, -4225, 5442, -9006, -429, 160, -9234, -4444, 3586, -5711, -9506, -79, -4418, -4348, -5891]
-;
-        int k = 93;
+        int[] nums = [7,4,5,8,8,3,9,8,7,6];
+
+        int k = 7;
 
         Console.WriteLine("result " + MyFunction(nums, k));
     }
 
-    static double MyFunction(int[] nums, int k)
-    {
-        int length = nums.Length;
-        long? maximumAvg = null;
-
-        for (int i = 0; i < length; i++)
-        {
-            int? tempSum = null;
-            if (!((i + k) > length))
-            {
-
-                for (int y = 0; y < k; y++)
-                {
-
-                    
-
-                    if (i + y < length)
-                    {
-
-
-                        if(tempSum == null)
-                        {
-                            tempSum = nums[i + y];
-                        }
-                        tempSum = tempSum + nums[i + y] ;
-
-                    }
-
-                }
-            }
-            if (maximumAvg == null || tempSum > maximumAvg)
-            {
-                
-                
-                maximumAvg = tempSum;
-            }
-        }
-
-        if(maximumAvg == null)
-        {
-            maximumAvg = 0;
-        }
-        return (double)maximumAvg / k;
-    }
+   
 }
+
+// ???????ms, ???????MB
+//First solution which time exceeded. which is understandable with the double loop on massive arrays of nums[] (O(n*k))
+//The solution itself works, its just not optimal at all.
+// static double MyFunction(int[] nums, int k)
+//     {
+//         int length = nums.Length;
+//         long? maximumAvg = null;
+
+//         for (int i = 0; i < length; i++)
+//         {
+//             int? localAvg = null;
+//             if (!((i + k) >= length))
+//             {
+//                 for (int y = 0; y < k; y++)
+//                 {
+//                     if (localAvg == null)
+//                     {
+//                         localAvg = nums[i + 0];
+//                         continue;
+//                     }
+//                     localAvg = localAvg + nums[i + y];
+
+//                 }
+//             }
+
+//             if (maximumAvg == null || localAvg > maximumAvg)
+//             {   
+
+//                 maximumAvg = localAvg;
+//             }
+//         }
+
+//         return (double)maximumAvg / k;
+//     }
+
+//2ms, 60MB
+//Much better solution, instead of going again through same numbers we instead of everyiteration delete old number and add the new one. And we just check if sum of this is higher than old maxSum.
+//Thats why its categorized as "window" exercise. 
+//  static double MyFunction(int[] nums, int k)
+//     {
+//         int length = nums.Length;
+//         long maxSum = 0;
+
+//         long tempSum = 0;
+
+//         for (int i = 0; i < k; i++)
+//         {
+//             tempSum = tempSum + nums[i];
+//         }
+
+
+//         maxSum = tempSum;
+//         for (int i = k; i < length; i++)
+//         {
+
+//             tempSum = tempSum + nums[i] - nums[i - k];
+
+            
+//                 if (tempSum > maxSum)
+//                 {
+//                     maxSum = tempSum;
+
+//                 }
+             
+            
+            
+            
+            
+//         }
+
+
+
+//         return (double)maxSum / k;
+//     }
