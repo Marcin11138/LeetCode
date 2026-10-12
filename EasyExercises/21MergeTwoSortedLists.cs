@@ -18,13 +18,11 @@ class MergeTwoSortedLists
 
     static void Main(string[] args)
     {
-        ListNode list1 = new ListNode(1);
-        list1.next = new ListNode(2);
-        list1.next.next = new ListNode(4);
+        ListNode list1 = null;
 
-        ListNode list2 = new ListNode(1);
-        list2.next = new ListNode(3);
-        list2.next.next = new ListNode(4);
+
+        ListNode list2 = null;
+
 
         ListNode response = MyFunction(list1, list2);
         while (response != null)
@@ -44,38 +42,40 @@ class MergeTwoSortedLists
 //0ms, 43.66MB
 //This one was a struggle, understanding how nodes are saved in memory was a tricky thing to take in. 
 //Fought a bit to solve it by myself, but had to access other people solutions and a bit of googling to understand whats going on.
-//In short. We create first dummy node, this node access directly the same node that is referenced in dummy in memory. 
-//In middle of first iteration we set the pointer in the memory to point to node from list. 
-//This is for us to remember start of the linked list.
-// On end of first iteration our node goes into one of the nodes that are already in List(1 or 2), we go to next node in list everytime we set it as next in node.
-// As last we  also check if there are any reminders in lists, if so we add it as next pointer in our node.
+//In short. We create first dummy node, this is a dummy node, because we are going to use it only as head pointing to next node.
+//Node variable is pointer, it points current node we are in. So on first loop the "node" is dummy node reference. Where we set the node.next with one that should be  next..
+//.. in this example node with smaller number which will be first node in list1 or 2. On next iteration our pointer is on the first node in one of the list (node = listx)
+//And the listx pointer moved forward, as the first entry is already used. (So it look at next node in the same list instead on itself); 
+//It iterates after until list1 or list2 isnt null. 
+//As last we  also check if there are any reminders in lists, if so we add it as next pointer in our node.
+//We return dummy.next as next node is the true head we want without dummy node.
 
-        //ListNode dummy = new ListNode();
-        // ListNode node = dummy;
+//ListNode dummy = new ListNode();
+// ListNode node = dummy;
 
-        // while (list1 != null && list2 != null)
-        // {
-        //     if (list1.val <= list2.val)
-        //     {
-        //         node.next = list1;
-        //         list1 = list1.next;
-        //     }
-        //     else
-        //     {
-        //         node.next = list2;
-        //         list2 = list2.next;
-        //     }
-        //     node = node.next;
-        // }
+// while (list1 != null && list2 != null)
+// {
+//     if (list1.val <= list2.val)
+//     {
+//         node.next = list1;
+//         list1 = list1.next;
+//     }
+//     else
+//     {
+//         node.next = list2;
+//         list2 = list2.next;
+//     }
+//     node = node.next;
+// }
 
-        // if (list1 != null)
-        // {
-        //     node.next = list1;
-        // }
-        // if(list2 != null)
-        // {
-        //     node.next = list2;
-        // }
+// if (list1 != null)
+// {
+//     node.next = list1;
+// }
+// if(list2 != null)
+// {
+//     node.next = list2;
+// }
 
-       
-        // return dummy.next;
+
+// return dummy.next;
