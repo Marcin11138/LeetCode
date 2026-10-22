@@ -50,7 +50,7 @@ class MergeTwoBinaryTrees
 //#2 Attempt
 //This attempt is upgrade of attempt #1. 
 //Instead of running if both of them are null, if both of them are not null, and if one of them is null.
-//We first check if root1 == null, if it is we return early that for example root.left = root2, if root2 was null too in both ifs it would be null anyway.
+//We first check if root1 == null, if it is we return early that for example root.left = root2, if root2 was null too the second check would return null anyway.
 //If there was an entry in root2, root1 was the last node on this side so it can be replaced by root2. If root2 is null, we return same root1 as it didnt change.
 //If both arent null, we can sum the vals to the first root1. (As we use the root1 as the main merger);
 //And on finish we return our merger object which was root1. 
