@@ -23,39 +23,7 @@ class AverageOfLevelsInBinaryTree
 
     static IList<double> MyFunction(TreeNode root)
     {
-        List<double> averages = new();
-        Queue<TreeNode> queue = new();
-        if(root == null)
-        {
-            return [];
-        }
-
-        queue.Enqueue(root);
-        while(queue.Count > 0)
-        {
-            int levelCount = queue.Count;
-            double sum = 0;
-
-            for (int i = 0; i < levelCount; i++)
-            {
-                TreeNode node = queue.Dequeue();
-
-                sum = sum + node.val;
-
-                if (node.left != null)
-                {
-                    queue.Enqueue(node.left);
-                }
-                if (node.right != null)
-                {
-                    queue.Enqueue(node.right);
-                }
-            }
-            averages.Add(sum / levelCount);
-        }
-         
-
-        return averages;
+        
     }
 
 }
@@ -108,6 +76,53 @@ class AverageOfLevelsInBinaryTree
 //             }
 //         }
 
+
+//         return averages;
+//     }
+
+
+//2# attempt 
+//2ms, 49.68MB  97.86%, 100%
+//Iterative BFS
+//Much better solution running only with one queue as it should, from the start. 
+//We run a while loop, while the queue.Count > 0 and we get how many nodes are currently in the queue as it is the levelCount, we start from root so it is 1.
+//We have a sum outside of our next loop which is for loop, because its a for loop and not while loop it stops after the levelCount set above is 0. 
+//In the for loop, we dequeue a node, and add it to sum. We add the children nodes to the queue. When the for loop ends we add a entry to averagesList we created.
+//which is sum / amountOfNodes
+//And because there are still nodes in queue the while loop again, and we start with next level. It stops when there is no nodes in queue, which will be at last level.
+//  static IList<double> MyFunction(TreeNode root)
+//     {
+//         List<double> averages = new();
+//         Queue<TreeNode> queue = new();
+//         if(root == null)
+//         {
+//             return [];
+//         }
+
+//         queue.Enqueue(root);
+//         while(queue.Count > 0)
+//         {
+//             int levelCount = queue.Count;
+//             double sum = 0;
+
+//             for (int i = 0; i < levelCount; i++)
+//             {
+//                 TreeNode node = queue.Dequeue();
+
+//                 sum = sum + node.val;
+
+//                 if (node.left != null)
+//                 {
+//                     queue.Enqueue(node.left);
+//                 }
+//                 if (node.right != null)
+//                 {
+//                     queue.Enqueue(node.right);
+//                 }
+//             }
+//             averages.Add(sum / levelCount);
+//         }
+         
 
 //         return averages;
 //     }
