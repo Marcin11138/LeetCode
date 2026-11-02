@@ -4,28 +4,34 @@ class ProductOfArrayExceptSelf
     {
         int[] nums = [1, 2, 3, 4];
 
-        System.Console.WriteLine(MyFunction(nums)[3]);
+        System.Console.WriteLine(MyFunction(nums)[0]);
     }
 
     static int[] MyFunction(int[] nums)
     {
-        int length = nums.Length - 1;
+        int length = nums.Length;
         int[] result = new int[length];
 
         int num = 1;
-        for (int i = 0; i <= length; i++)
+        for (int i = 0; i <= length - 1; i++)
         {
             result[i] = num;
             num = num * nums[i];
         }
 
         num = 1;
-        for (int i = length; i >= length; i--)
+        foreach (int item in result)
         {
-            result[i] = result[i] * num;
-            num = num *  
+            System.Console.WriteLine("a" + item);
         }
-          
+        for (int i = length - 1; i >= 0; i--)
+        {
+            System.Console.WriteLine(result[i]+ " " + num);
+    
+            result[i] = result[i] * num;
+            num = num * nums[i]; 
+            
+        }  
         return result;
 
     }
@@ -33,7 +39,7 @@ class ProductOfArrayExceptSelf
 
 
 //1# solution
-//Time Excedeed, raw thinking
+//Time Excedeed, raw solution
 // static int[] MyFunction(int[] nums)
 //     {
 //         int[] result = new int[nums.Length];
@@ -58,4 +64,32 @@ class ProductOfArrayExceptSelf
 
 //         return result;
         
+//     }
+
+//2# attempt
+//1ms, 62.42MB 100%, 77.91%
+//We create left array at first which is saved in result. But we add an extra element at the beginning which is * 1.
+//Then in next iteration, where we start from last position we add a * 1 element at last entry. 
+//So the result[i] is always i - 1 (left) * i + 1 (right) as we added dummies at the start (or "end" on right side).
+// static int[] MyFunction(int[] nums)
+//     {
+//         int length = nums.Length;
+//         int[] result = new int[length];
+
+//         int num = 1;
+//         for (int i = 0; i <= length - 1; i++)
+//         {
+//             result[i] = num;
+//             num = num * nums[i];
+//         }
+
+//         num = 1;
+//         for (int i = length - 1; i >= 0; i--)
+//         {
+//             result[i] = result[i] * num;
+//             num = num * nums[i]; 
+            
+//         }  
+//         return result;
+
 //     }
