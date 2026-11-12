@@ -43,7 +43,8 @@ class SortColors
 //2# Attempt
 //0ms, 46.01MB 100%, 50.67%
 //In this solution we are moving 0 and 2, 0 on front (left) 2 on back(right).
-//1 stays in place which 
+//new position of 1 is just result of swaping position of 0. 
+//
 //  static void MyFunction(int[] nums)
 //     {
 
