@@ -10,65 +10,53 @@ class LongestSubstringWithoutRepeating
     static int MyFunction(string s)
     {
         HashSet<int> hashset = new();
-        char[] charArray = s.ToArray();
+        
         int count = 0;
         int bestCount = 0;
 
-        if (charArray.Length == 1)
+        if (s.Length == 1)
         {
             return 1;
         }
 
-        for (int i = 0; i < charArray.Length; i++)
+        for (int i = 0; i < s.Length; i++)
         {
-            System.Console.WriteLine("a" + i);
-
-            if (hashset.Add(charArray[i]))
+            if (hashset.Add(s[i]))
             {
-
                 count++;
             }
             else
             {
 
-
                 if (count > bestCount)
                 {
                     bestCount = count;
                 }
-                   
-
-                for (int y = i - 1; y > 0 ; y--)
+                int y = 1;
+                
+                while(y <= count)
                 {
-                                    
-
-                    if (charArray[y] == charArray[i])
+                    if (s[i - y] == s[i])
                     {
-                        // if (charArray[i - 1] == charArray[i])
-                        // {
-                        //     continue;
-                        // }
-                       
-                        i = y + 1;
-                            
-                        
-                        
-                        // System.Console.WriteLine(i + " " + y);
 
+                        i = i - y;
+                        break;
                     }
+                    y++;
                 }
 
-                hashset.Clear();
                 count = 0;
+                hashset.Clear();
 
-            }
+            }   
+
         }
 
         if (count > bestCount)
         {
             bestCount = count;
         }
-
+        
         return bestCount;
     }
 }
@@ -116,3 +104,6 @@ class LongestSubstringWithoutRepeating
 
 //         return bestCount;
 //     }
+
+//#2 Attempt
+// +
