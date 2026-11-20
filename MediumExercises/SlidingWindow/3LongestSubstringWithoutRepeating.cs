@@ -79,8 +79,6 @@ class LongestSubstringWithoutRepeating
 //On next iteration it will be on next position in array.
 //We reset our hashtable and we reset our count.
 
-
-
 // static int MyFunction(string s)
 //     {
 //         IDictionary<int, int> hashtable = new Dictionary<int, int>();
@@ -124,6 +122,12 @@ class LongestSubstringWithoutRepeating
 
 //2# Attempt
 //58ms, 49.05MB 26.49%, 60.07%
+//In this solution i moved from using hashtable to using the ASCII of char as the index in int array.
+//The value is now the index of that character.
+//Also you dont need to convert string to array, you can directly access the chars at indexes.
+//If the value already exists, we go back by how many count we have currently. 
+//If we find the same index as we are in currently on i loop, we set the i to the current y. On next iteration it starts again from +1.
+
 
 // static int MyFunction(string s)
 //     {
@@ -147,7 +151,6 @@ class LongestSubstringWithoutRepeating
 //             }
 //             else
 //             {
-
 //                 if (count > bestCount)
 //                 {
 //                     bestCount = count;
@@ -182,7 +185,9 @@ class LongestSubstringWithoutRepeating
 // }
 
 //3#Solution 
+//Here i tried to use BitArray instead of int array, it takes much less memory but it isnt faster.
 // 83ms, 47.60MB 21.66%, 98.27%
+
 //   static int MyFunction(string s)
 //     {
 //         BitArray charArray = new BitArray(256);
@@ -241,6 +246,10 @@ class LongestSubstringWithoutRepeating
 
 //4# Solution
 //48ms, 49.60MB 29.65%, 34.38%
+//Here i got back again to int Array. I took out one of loops because we already know the position of last 
+//So we dont need to go specific about of steps back first to get it, we still need to delete the already filled entries.
+
+
 // static int MyFunction(string s)
 //     {
 //         int[] charArray = new int[256];
@@ -256,7 +265,6 @@ class LongestSubstringWithoutRepeating
 
 //         for (int i = 0; i < s.Length; i++)
 //         {
-
 //             if (charArray[s[i]] == -1)
 //             {
 //                 charArray[s[i]] = i;
@@ -264,13 +272,10 @@ class LongestSubstringWithoutRepeating
 //             }
 //             else
 //             {
-
 //                 if (count > bestCount)
 //                 {
 //                     bestCount = count;
 //                 }
-
-
 
 //                 int iTemp = i;
 //                 i = charArray[s[i]];
@@ -280,10 +285,7 @@ class LongestSubstringWithoutRepeating
 
 //                     charArray[s[iTemp - y]] = -1;
 //                 }
-   
-//                  count = 0;
-  
-
+//                 count = 0;
 //             }
 
 //         }
@@ -298,6 +300,11 @@ class LongestSubstringWithoutRepeating
 
 //5# Attempt
 //30ms, 49.68Mb 63.82%, 34.38%
+//Here we started saving the characters front of the old char that is same as current i.
+//Its so we dont recheck same values again, we calculate the difference of count - difference of a and b. 
+//We count the difference by iterating down from the i to when we hit the same value.
+//Then we take out the chars from that point and we do count--;
+//On next i increment, we will start from the same i but we will have all the chars that are before it already counted.
 
 // public int LengthOfLongestSubstring(string s) {
 //        int[] charArray = new int[256];
@@ -360,6 +367,10 @@ class LongestSubstringWithoutRepeating
 
 //6# Solution
 //12ms, 48.91MB 92.08%, 65.09%
+//Here i started calulating difference of i and the old value by just calculating (i - lastIndexOfDuplicate)
+//which gives us difference directly, and we can just run a loop that is taking out the rest out of count and 
+//charArray.
+
 // static int MyFunction(string s)
 //     {
 //         int[] charArray = new int[256];
